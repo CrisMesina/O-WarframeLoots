@@ -81,6 +81,25 @@ export const Index = () => {
         setCurrentPage(1)
     }, [searchTerm, sortOrder, rarityFilter, relicFilter, primesFilter])
 
+    const getItemImage = (itemName) => {
+        
+        const name = itemName.toLowerCase()
+        
+        if (name.includes('relic')) {
+            return '/IconRelic.png'
+        } else if (name.includes('blueprint')) {
+            return '/IconBlueprint.png'
+        } else if (name.includes('prime')) {
+            return '/images/prime.png'
+        } else if (name.includes('credits')){
+            return '/IconPurchase.png'
+        } else if(name.includes('arcane')) {
+            return '/IconArcane.png'
+        } else {
+            return '/IconDefault.png'
+        }
+    }
+
     useEffect(() => {
         Swal.fire({
             title: '¡Bienvenido a Item Loots Warframe!',
@@ -183,6 +202,10 @@ export const Index = () => {
                     <div className='grid gap-6 sm:grid-cols-2 xl:grid-cols-3'>
                         {currentItems.map((item, i) => (
                             <article key={i} className='group rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-[0_25px_75px_-30px_rgba(14,165,233,0.65)] transition hover:-translate-y-1 hover:border-cyan-300/30 hover:bg-white/10'>
+                                <div className='mb-4 rounded-xl overflow-hidden bg-white/10 border border-white/10 h-40 flex items-center justify-center'>
+                                    <img src={getItemImage(item.item)} alt={item.item} className='w-full h-full object-cover' />
+                                </div>
+
                                 <div className='flex items-center justify-between gap-3 mb-5'>
                                     <div>
                                         <p className='text-sm font-medium uppercase tracking-[0.18em] text-cyan-200'>Chance</p>
