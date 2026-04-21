@@ -8,8 +8,15 @@ export const Index = () => {
     const [loading, setLoading] = useState(true)
     const [searchTerm, setSearchTerm] = useState('')
     const [sortOrder, setSortOrder] = useState('desc') // 'asc' o 'desc'
+
+
+    // Filtros 
+
     const [rarityFilter, setRarityFilter] = useState('all')
     const [relicFilter, setRelicFilter] = useState('all')
+    const [primesFilter, setPrimesFilter] = useState('all')
+
+    // Paginacion
     const [currentPage, setCurrentPage] = useState(1)
     const itemsPorPagina = 9
 
@@ -33,8 +40,17 @@ export const Index = () => {
 
     const filteredAndSortedData = data
         .filter(item => item.item?.toLowerCase().includes(searchTerm.toLowerCase()))
+        // Filtrado por rareza
         .filter(item => rarityFilter === 'all' || item.rarity === rarityFilter)
-        .filter(item => relicFilter === 'all' || item.item?.toLowerCase().includes('relic'))
+        // Opciones de filtrado para el Select
+        .filter(item => {
+            if (relicFilter === 'all') return true;
+            if (relicFilter === 'relics') return item.item?.toLowerCase().includes('relic');
+            if (relicFilter === 'prime') return item.item?.toLowerCase().includes('prime');
+            if (relicFilter === 'blueprint') return item.item?.toLowerCase().includes('blueprint');
+            return true;
+        })
+        .filter(item => primesFilter === 'all' || item.item?.toLowerCase().includes('prime'))
         .sort((a, b) => {
             if (sortOrder === 'asc') {
                 return (Number(a.chance) || 0) - (Number(b.chance) || 0)
@@ -57,12 +73,13 @@ export const Index = () => {
         setSearchTerm('')
         setRarityFilter('all')
         setRelicFilter('all')
+        setPrimesFilter('all')
         setSortOrder('desc')
     }
 
     useEffect(() => {
         setCurrentPage(1)
-    }, [searchTerm, sortOrder, rarityFilter, relicFilter])
+    }, [searchTerm, sortOrder, rarityFilter, relicFilter, primesFilter])
 
     useEffect(() => {
         Swal.fire({
@@ -152,10 +169,16 @@ export const Index = () => {
                                 >
                                     <option value='all'>Todos los items</option>
                                     <option value='relics'>Sólo reliquias</option>
+                                    <option value='prime'>Sólo primes</option>
+                                    <option value='blueprint'>Sólo planos</option>
                                 </select>
                             </div>
                         </div>
                     </div>
+
+
+                    {/* MUESTRA DE ITEMS */}
+
 
                     <div className='grid gap-6 sm:grid-cols-2 xl:grid-cols-3'>
                         {currentItems.map((item, i) => (
@@ -176,6 +199,8 @@ export const Index = () => {
                             </article>
                         ))}
                     </div>
+
+                        {/* BOTONES PARA CAMBIAR PAGINA  */}
 
                     <div className='mt-12 flex flex-wrap items-center justify-center gap-3'>
                         <button
