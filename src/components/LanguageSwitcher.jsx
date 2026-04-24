@@ -1,32 +1,35 @@
 import { useTranslation } from '../hooks/useTranslation';
+import './LanguageSwitcher.css';
 
 export const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
 
-  const handleLanguageChange = (e) => {
-    const lang = e.target.value;
+  const handleLanguageChange = (lang) => {
     i18n.changeLanguage(lang);
     localStorage.setItem('language', lang); // Guardar preferencia
   };
 
-  const languages = [
-    { code: 'es', name: '🇪🇸 Español', label: 'Español' },
-    { code: 'en', name: '🇬🇧 English', label: 'English' }
-  ];
-
   return (
-    <div className="language-switcher">
-      <select
-        value={i18n.language}
-        onChange={handleLanguageChange}
-        className="px-4 py-2 rounded-lg border border-cyan-500/30 bg-white/10 text-white font-medium hover:border-cyan-500/50 hover:bg-white/20 transition-all cursor-pointer backdrop-blur-sm focus:outline-none focus:border-cyan-500"
-      >
-        {languages.map((lang) => (
-          <option key={lang.code} value={lang.code} className="bg-slate-900">
-            {lang.name}
-          </option>
-        ))}
-      </select>
+    <div className="language-switcher-container">
+      <div className="language-slider">
+        <button
+          onClick={() => handleLanguageChange('es')}
+          className={`language-btn language-btn-es ${i18n.language === 'es' ? 'active' : ''}`}
+        >
+          <span className="label">Español</span>
+        </button>
+        
+        <div className="slider-toggle" style={{
+          transform: i18n.language === 'en' ? 'translateX(108px)' : 'translateX(0)'
+        }}></div>
+        
+        <button
+          onClick={() => handleLanguageChange('en')}
+          className={`language-btn language-btn-en ${i18n.language === 'en' ? 'active' : ''}`}
+        >
+          <span className="label">English</span>
+        </button>
+      </div>
     </div>
   );
 };

@@ -28,53 +28,31 @@ const apiValueMap = {
 /**
  * Función para traducir valores de la API
  * @param {string} value - Valor que retorna la API
- * @returns {string} - Valor traducido
+ * @returns {string} - Valor sin traducir (valor original)
  */
 export const translateApiValue = (value) => {
-  if (!value) return value;
-
-  const key = apiValueMap[value.toLowerCase()];
-  return key ? i18n.t(key) : value; // Si no existe la clave, retorna el valor original
+  // Los datos de la API NO se traducen, se devuelven como vienen
+  return value;
 };
 
 /**
  * Función para traducir propiedades de objetos de la API
  * @param {object} item - Objeto de la API
  * @param {array} properties - Propiedades a traducir
- * @returns {object} - Objeto con propiedades traducidas
+ * @returns {object} - Objeto sin traducir (valores originales de API)
  */
 export const translateApiObject = (item, properties = []) => {
-  const translatedItem = { ...item };
-
-  properties.forEach(prop => {
-    if (translatedItem[prop]) {
-      translatedItem[prop] = translateApiValue(translatedItem[prop]);
-    }
-  });
-
-  return translatedItem;
+  // Los datos de la API NO se traducen, se devuelve el objeto como viene
+  return item;
 };
 
 /**
  * Función para traducir palabras dentro de un nombre de item
- * Por ejemplo: "Credit A" → "Crédito A"
+ * Por ejemplo: "Ash Prime" → "Ash Prime" (sin cambios, datos de API no se traducen)
  * @param {string} itemName - Nombre del item de la API
- * @returns {string} - Nombre traducido
+ * @returns {string} - Nombre sin traducir (valor original)
  */
 export const translateItemName = (itemName) => {
-  if (!itemName) return itemName;
-
-  let translatedName = itemName;
-
-  // Buscar cada palabra mapeada en el nombre y reemplazarla
-  Object.keys(apiValueMap).forEach(key => {
-    const regex = new RegExp(`\\b${key}\\b`, 'gi'); // Busca la palabra exacta (no importa mayúsculas)
-    if (regex.test(translatedName)) {
-      const translationKey = apiValueMap[key.toLowerCase()];
-      const translatedWord = i18n.t(translationKey);
-      translatedName = translatedName.replace(regex, translatedWord);
-    }
-  });
-
-  return translatedName;
+  // Los datos de la API NO se traducen, se devuelven como vienen
+  return itemName;
 };

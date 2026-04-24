@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 
 // importacion sweet alert2
 import Swal from 'sweetalert2'
-import { LanguageSwitcher } from '../components/LanguageSwitcher'
+//import { LanguageSwitcher } from '../components/LanguageSwitcher'
+import { Navbar } from '../components/Navbar'
 import { useTranslation } from '../hooks/useTranslation'
 import { translateApiValue, translateItemName } from '../i18n/apiTranslations'
 
-export const Index = () => {
+export const Index = ({ onBackToLanding }) => {
     const { t, i18n } = useTranslation()
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
@@ -120,21 +121,25 @@ export const Index = () => {
                 confirmButton: 'swal2-custom-confirm'
             }
         })
-    }, [i18n.language, t])
-
+    }, [, t])
+    // i18n.language
     return (
         <div className='min-h-screen bg-page text-white'>
+            <Navbar onLogoClick={onBackToLanding} />
             {loading ? (
                 <div className='container mx-auto px-4 py-24 text-center'>
                     <p className='text-xl font-medium text-slate-200'>{t('loading')}</p>
                 </div>
             ) : (
-                <div className='container mx-auto px-4 pb-16'>
+                <div className='container mx-auto mt-10 px-4 pb-16'>
                     <section className='relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 px-6 py-10 shadow-2xl shadow-cyan-500/10 backdrop-blur-xl sm:px-10 sm:py-14 mb-10'>
                         <div className='absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.18),transparent_32%)]' />
-                        <div className='absolute top-6 right-6 sm:top-10 sm:right-10'>
-                            <LanguageSwitcher />
-                        </div>
+                        {/*
+                            <div className='absolute top-6 right-6 sm:top-10 sm:right-10'>
+                                <LanguageSwitcher />
+                            </div>
+
+                        */}
                         <div className='relative'>
                             <span className='inline-flex items-center rounded-full border border-cyan-300/30 bg-cyan-500/10 px-4 py-1 text-sm font-semibold text-cyan-100'>{t('mainBadge')}</span>
                             <h1 className='mt-6 text-4xl font-bold tracking-tight text-white sm:text-5xl'>{t('mainTitle')}</h1>

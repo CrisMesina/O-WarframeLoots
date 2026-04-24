@@ -1,0 +1,111 @@
+.language-switcher-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.language-slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 220px;
+  height: 50px;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(34, 197, 94, 0.1) 100%);
+  border: 2px solid rgba(6, 182, 212, 0.3);
+  border-radius: 30px;
+  padding: 4px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.language-slider:hover {
+  border-color: rgba(6, 182, 212, 0.6);
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.2) 0%, rgba(34, 197, 94, 0.2) 100%);
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+}
+
+.slider-toggle {
+  position: absolute;
+  width: 104px;
+  height: 42px;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.8) 0%, rgba(34, 197, 94, 0.8) 100%);
+  border-radius: 20px;
+  left: 4px;
+  top: 4px;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
+  pointer-events: none;
+}
+
+.language-btn {
+  position: relative;
+  flex: 1;
+  min-width: 100px;
+  height: 42px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 0.3s ease;
+  z-index: 2;
+  border-radius: 20px;
+  padding: 0;
+  flex-direction: column;
+}
+
+.language-btn .flag {
+  font-size: 22px;
+  display: block;
+  line-height: 1;
+}
+
+.language-btn .label {
+  display: block;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.language-btn:hover {
+  color: rgba(255, 255, 255, 0.9);
+  transform: scale(1.08);
+}
+
+.language-btn.active {
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(6, 182, 212, 0.8);
+  font-weight: 700;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .language-slider {
+    width: 140px;
+    height: 44px;
+  }
+
+  .language-btn {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .language-slider {
+    width: 130px;
+    height: 44px;
+    padding: 3px;
+  }
+
+  .slider-toggle {
+    height: 38px;
+  }
+
+  .language-btn {
+    font-size: 20px;
+  }
+}
