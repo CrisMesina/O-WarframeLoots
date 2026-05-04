@@ -107,12 +107,12 @@ export const Index = ({ onBackToLanding }) => {
 
     useEffect(() => {
         Swal.fire({
-            title: t('welcomeTitle'),
-            text: t('welcomeText'),
+            title: 'Bienvenido a Item Loots Warframe!',
+            text: 'Por el momento solo se pueden buscar los items en Ingles. En caso de no saber cual puede ser, no dudes en usar el traductor de google para traducir el nombre del item al ingles y asi poder buscarlo.',
             icon: 'info',
             background: '#0b1726',
             color: '#e2e8f0',
-            confirmButtonText: t('welcomeButton'),
+            confirmButtonText: 'Continuar',
             confirmButtonColor: '#22d3ee',
             customClass: {
                 popup: 'swal2-custom-popup',
